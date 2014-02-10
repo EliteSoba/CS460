@@ -100,7 +100,7 @@ public class HW1 implements Comparable{
 	public static void DFQ(ArrayList<HW1> list, HW1 node) {
 		PriorityQueue<HW1> queue = new PriorityQueue<HW1>(11, new Comparator<HW1>() {
 			public int compare(HW1 arg0, HW1 arg1) {
-				return new Integer(arg1.distanceFromStart).compareTo(arg0.distanceFromStart);
+				return arg1.city.toString().compareTo(arg0.city.toString());
 			}
 		});
 		for (HW1 temp: node.distances.keySet()) {
@@ -154,7 +154,7 @@ public class HW1 implements Comparable{
 	public static HW1 search(HW1 start, HW1 target) {
 		ArrayList<HW1> queue = new ArrayList<HW1>();
 		queue.add(start);
-		
+		//dfs alphabetical
 		
 		while(!queue.isEmpty()) {
 			HW1 node = queue.remove(0);
@@ -166,7 +166,7 @@ public class HW1 implements Comparable{
 				return node;
 			}
 			System.out.print(node+", ");
-			UFQ(queue, node);
+			DFQ(queue, node);
 		}
 		
 		return null;
