@@ -37,9 +37,9 @@ public class HW3 {
 		
 		for (int i = 0; i < board[0].length; i++) {
 			if (board[0][i] == 'W')
-				return 10; //In this situation, there should be no difference between 1 and 10
+				return ADVANCED_HEURISTIC ? 100000:1;
 			if (board[5][i] == 'B')
-				return -10;
+				return ADVANCED_HEURISTIC ? -100000:-1;
 		}
 		
 		if (ADVANCED_HEURISTIC) {
@@ -79,13 +79,27 @@ public class HW3 {
 		return 0;
 	}
 	
-	public static void main(String args[]) {
-		readBoard("input.txt");
-		/*for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 3; j++)
+	public static void print2DArray(char[][] board) {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++)
 				System.out.print(board[i][j]);
 			System.out.println();
-		}*/
+		}
+	}
+	
+	public static void main(String args[]) {
+		readBoard("input.txt");
+		
+		Board b = new Board(board);
+		
+		ArrayList<char[][]> states = b.blackMove();
+		
+		for (char[][] i : states) {
+			//print2DArray(i);
+			System.out.print(getHeuristic(i));
+			System.out.println();
+		}
+		
 		System.out.println(getHeuristic(board));
 	}
 
